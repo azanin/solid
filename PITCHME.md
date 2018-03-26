@@ -1,52 +1,43 @@
-# Agenda
+## Agenda
 
-SOLID Principles
+- SOLID Principles
 
-Testing
+- Testing
 
-Functional Programming
+- Functional Programming
 
 ---
-class: center, middle
-# SOLID Principles
+## SOLID Principles
 
 ***Acronym for five fundamental principles in O-O programming
 coined in early 2000’s
 by *Michael Feathers* and *Robert C. Martin (aka Uncle Bob)* ***
 
 ---
-class: center
-# S => Single Responsability
+## S: Single Responsability
 
---
+*A class should have only one reason to change.*
+
++++
 
 ### Problem: Blog Posts That Can "Print" Themselves
 Let's say we have a Blog Post class encapsulating the concept of a web post and its functionalities.
 It can provide its title, author and its content.
 
---
++++
 
-### Goal 0: it has to be able to print its content on the console.
+### Try to print its content on the console.
 
---
++++
 
-### Goal 1: What modifications if it should be able to print its content as json?
+### What if it should be able to print its content as json?
 
---
+- Hint: try to separate the business logic from the presentation.
+- Mixing business logic with presentation is bad because it is against the Single Responsibility Principle (SRP)
 
-Hint: try to separate the business logic from the presentation.
++++
 
-???
-Mixing business logic with presentation is bad because it is against the Single Responsibility Principle (SRP)
-
---
-
-### Goal 2: it has to be able to print its content on the .
-
----
-Mixing business logic with presentation is bad because it is against the Single Responsibility Principle (SRP)
----
-
+### What if you have to print its content on a file?
 
 ---
 # S => Single Responsability
