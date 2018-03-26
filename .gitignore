@@ -18,3 +18,33 @@ project/plugins/project/
 
 ## Directory-based project format:
 .idea/
+
+## Directory-based project format:
+.idea/
+# if you remove the above rule, at least ignore the following:
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/modules
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+logs/
+private.conf
+
+project/plugins/project/
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
