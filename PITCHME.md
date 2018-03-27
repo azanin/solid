@@ -49,6 +49,7 @@ If a class has more than one responsibility, then there will be more than one re
 +++
 
 If the two responsibilities don't change at different times, then there is no need to separate them.
+
 Separating them would lead to *Needless Complexity*, indeed.
 
 ---
@@ -77,9 +78,15 @@ Hint: abstraction is the key
 ### (O)pen Closed
 ##### Thoughts
 
-- When a single change to a program results in a cascade of changes to dependent modules, that program becomes fragile, rigid, unpredictable and unreusable.
-- We should strive to write code that doesn't have to be changed every time the requirements change.
-- You should extend modules' behaviour adding new code, avoiding changes to the old working code.
+When a single change to a program results in a cascade of changes to dependent modules, that program becomes fragile, rigid, unpredictable and unreusable.
+
++++
+
+We should strive to write code that doesn't have to be changed every time the requirements change.
+
++++
+
+You should extend modules' behaviour adding new code, avoiding changes to the old working code.
 
 ---
 
@@ -95,7 +102,7 @@ Hint: abstraction is the key
 
 +++
 
-### What if we want to resize a Square too?
+What if we want to resize a Square too?
 
 +++
 
