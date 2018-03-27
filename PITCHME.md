@@ -61,6 +61,8 @@ Hint => try to separate the business logic from the presentation
 Let’s say that we’ve got a Rectangle class.
 It is capable of getting its width and height.   
 
++++
+
 ### Try to build an application that can calculate the total area of a collection of rectangles.
 Hint => mind the previous SRP!
 
@@ -75,11 +77,25 @@ Hint => Abstraction is the key
 
 +++ 
 
-
-
 ## S:  Open | Closed
 #### Thoughts
 
 - When a single change to a program results in a cascade of changes to dependent modules, that program becomes fragile, rigid, unpredictable and unreusable.
 - Instead we should strive to write code that doesn’t have to be changed every time the requirements change.
 - So, when requirements change, you extend the behavior of such modules by adding new code, not by changing old code that already works.
+
+---
+
+## L: Liskov Substitution
+
+*Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.*
+
++++
+
+### Problem: 
+
++++
+
+## L: Liskov Substitution
+#### Thoughts
+- LSP depends on OCP
