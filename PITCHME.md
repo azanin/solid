@@ -124,3 +124,14 @@ Think about the relation between LSP and OCP
 Hint: have you ever seen an eating robot?
 
 ---
+
+## D: Dependency Inversion
+
+*One should depend upon abstractions, not concretions*
+
++++
+
+### Problem:
+Hint =>
+
+---
