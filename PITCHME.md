@@ -1,8 +1,8 @@
 ### Agenda
 
-- SOLID Principles
+SOLID Principles
 
-- Functional Programming
+Functional Programming
 
 ---
 ### SOLID Principles
@@ -22,27 +22,34 @@ We have a Blog Post class representing a web post composed by a title, author an
 
 +++
 
-### Try to print out its content to the console.
+Try to print out its content to the console.
 
 +++
 
-### What if we want to print the post's content as json?
+What if we want to print the post's content as json?
 
 Hint: Separation of business logic and data presentation is important!
 <!-- Mixing business logic with presentation is bad because it is against the Single Responsibility Principle (SRP)-->
 
 +++
 
-### What if you have to print out its content to a file?
+What if you have to print out its content to a file?
 
 +++ 
 
 ### (S)ingle Responsability
 ##### Thoughts
 
-- Separate these two responsibilities into separate classes is so important because every responsibility is an axis of change.
-    - If a class has more than one responsibility, then there will be more than one reason for it to change.
-    - If the two responsibilities don't change at different times, then there is no need to separate them. Separating them would lead to *Needless Complexity*, indeed.
+Separate these two responsibilities into separate classes is so important because every responsibility is an axis of change.
+
++++
+
+If a class has more than one responsibility, then there will be more than one reason for it to change.
+
++++
+
+If the two responsibilities don't change at different times, then there is no need to separate them.
+Separating them would lead to *Needless Complexity*, indeed.
 
 ---
 
@@ -58,12 +65,12 @@ We've defined a Rectangle class with its width and height.
 
 +++
 
-### Build an application calculating the rectangles' collection total area.
+Build an application calculating the rectangles' collection total area.
 Hint: keep in mind the SRP!
 
 +++ 
 
-### Extend the application calculating circles' area as well.
+Extend the application calculating circles' area as well.
 Hint: abstraction is the key
 +++
 
