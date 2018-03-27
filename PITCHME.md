@@ -88,14 +88,36 @@ Hint => Abstraction is the key
 
 ## L: Liskov Substitution
 
-*Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.*
+*An object of type T may be substituted with any object of a subtype S*
+
+A.K.A.
+
+*Child classes should never break the parent class type definitions*
 
 +++
 
-### Problem: 
+### Problem: Add a method to resize a Rectangle
+
++++
+
+### What if we want to also resize a Square as well?
 
 +++
 
 ## L: Liskov Substitution
 #### Thoughts
-- LSP depends on OCP
+- Think about the releation between LSP and OCP
+
+---
+
+## I: Interface Segregation
+
+*No client should be forced to depend on methods it does not use.*
+*Instead of one fat interface many small interfaces are prefered based on groups of methods, each one serving one submodule.*
+
++++
+
+### Problem: Given a Worker interface and a Person subtype, add a Robot worker
+Hint => Have you ever seen a robot which eats?
+
+---
