@@ -125,13 +125,122 @@ Hint: have you ever seen an eating robot?
 
 ---
 
-## D: Dependency Inversion
+### (D)ependency Inversion
 
 *One should depend upon abstractions, not concretions*
 
 +++
 
-### Problem:
-Hint =>
+### Problem: WeatherAggregator
 
+```java
+import com.tidyjava.weather.api1.WeatherApi1;
+import com.tidyjava.weather.api2.WeatherApi2;
+
+public class WeatherAggregator {
+    private WeatherApi1 weatherApi1 = new WeatherApi1();
+    private WeatherApi2 weatherApi2 = new WeatherApi2();
+
+    public double getTemperature() {
+        return (weatherApi1.getTemperatureCelcius() + toCelcius(weatherApi2.getTemperatureFahrenheit())) / 2;
+    }
+
+    private double toCelcius(double temperatureFahrenheit) {
+        return (temperatureFahrenheit - 32) / 1.8f;
+    }
+}
+```
+
++++
+
+Do you see any problems?
+
++++
+
+Solving the creation problem
+
+```java
+public WeatherAggregator(WeatherApi1 weatherApi1, WeatherApi2 weatherApi2) {
+        this.weatherApi1 = weatherApi1;
+        this.weatherApi2 = weatherApi2;
+    }
+```
++++
+
+Inverting the control... Abstract over concrete implementation
+
++++
+
+```java
+public interface WeatherSource {
+    float getTemperatureCelcius();
+}
+```
++++
+
+```java
+public double getTemperature() {
+        return weatherSources
+            .stream()
+            .mapToDouble(WeatherSource::getTemperatureCelcius)
+            .average()
+            .getAsDouble();
+    }
+```
+
++++
+
+### (D)ependency Inversion
+#### Thoughts
+
+Inversion of control is sometimes facetiously referred to as the "Hollywood Principle: Don't call us, we'll call you".
+
+Dependency inversion is critically important for the construction of code that is resilient to change.
+And, since the abstractions and details are all isolated from each other, the code is much easier to test and maintain.
+
+---
+
+### A Complete Exercise
+
+We'd like to extract some useful information from github.com about all the repositories belonging to ekmett user.
+The goal is to create two different reports:
+- Plain text report containing the most starred repo's summary.
+- Json file report containing all the repos belonging to ekmett.
+
++++
+
+You can query for repos at *https://api.github.com/users/ekmett/repos*
+
+A response example is available in project's resources folder.
+
++++
+Plain text file
+
+This reports must be in the following form:
+
+> ${user} owns ${num} repos.
+  His most starred one is ${repo_name} with ${num_stars} stars.
+  Here is a brief description: ${description}
+  Here's the last ${n} commit(s) of it available at ${https://api.github.com/repos/ekmett/${repo}/commits }
+  ${list of commit messages}
+  Here's ${contributors_url} you can find all the contributors.
+
+
+Plus: the commit messages' number should be configurable.
+
++++
+Json file report must be in the following format
+
+```json
+{
+	"user": "ekmett",
+	"repos": [{
+		"id": 85458673,
+		"name": "compiler",
+		"stargazers": 10,
+		"description": "description",
+		"commits": ["commit message1","commit message2"]
+	}]
+}
+```
 ---
