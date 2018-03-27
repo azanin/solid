@@ -22,20 +22,16 @@ We have a Blog Post class representing a web post composed by a title, author an
 
 +++
 
-Try to print out its content to the console.
+Try to print out its content as a string to the console.
 
 +++
 
-What if we want to print the post's content as json?
+What if we want to print the post's content as a json string to the console?
 
 Hint: Separation of business logic and data presentation is important!
 <!-- Mixing business logic with presentation is bad because it is against the Single Responsibility Principle (SRP)-->
 
 +++
-
-What if you have to print out its content to a file?
-
-+++ 
 
 ### (S)ingle Responsability
 ##### Thoughts
@@ -67,11 +63,13 @@ We've defined a Rectangle class with its width and height.
 +++
 
 Build an application calculating the rectangles' collection total area.
+
 Hint: keep in mind the SRP!
 
 +++ 
 
 Extend the application calculating circles' area as well.
+
 Hint: abstraction is the key
 +++
 
@@ -203,9 +201,14 @@ And, since the abstractions and details are all isolated from each other, the co
 ### A Complete Exercise
 
 We'd like to extract some useful information from github.com about all the repositories belonging to ekmett user.
+
 The goal is to create two different reports:
-- Plain text report containing the most starred repo's summary.
-- Json file report containing all the repos belonging to ekmett.
+
++++
+
+Plain text report containing the most starred repo's summary.
+
+Json file report containing all the repos belonging to ekmett.
 
 +++
 
@@ -218,13 +221,13 @@ Plain text file
 
 This reports must be in the following form:
 
-> ${user} owns ${num} repos.
+``` ${user} owns ${num} repos.
   His most starred one is ${repo_name} with ${num_stars} stars.
   Here is a brief description: ${description}
   Here's the last ${n} commit(s) of it available at ${https://api.github.com/repos/ekmett/${repo}/commits }
   ${list of commit messages}
   Here's ${contributors_url} you can find all the contributors.
-
+```
 
 Plus: the commit messages' number should be configurable.
 
@@ -243,4 +246,3 @@ Json file report must be in the following format
 	}]
 }
 ```
----
