@@ -246,3 +246,153 @@ Json file report must be in the following format
 	}]
 }
 ```
+---
+
+### Functional Programming
+
++++
+
+Let's starting from WHAT IS NOT...
+
+---
+
+### Imperative Programming Style
+
+Programs are composed by statements that "do" something:
+
+> *Do this and then Do that*
+
++++
+
+### State Mutations, here we are!
+
+```
+int y = 1;
+...
+public void do(int x) {
+    y++;
+    System.out.println("doing something with "+x);
+}
+...
+do(y);
+++y;
+```
+
+This imply an initial state, transitions, and an end state.
+
+---
+
+### Introducing Functional Programming (FP) Style
+
+Functional programs are composed by expressions "evaluating" something
+```
+public int do(int x) {
+    return ++x;
+}
+int y = do(1);
+int z = do(y);
+```
+
++++
+
+### Introducing Functional Programming (FP) Style
+
+Major difference between imperative and functional programming:  *No (Observable) Side Effects*
+- No mutation of variables
+- No printing to the console or to any device
+- No writing to files, databases, networks, or whatever
+- No exception throwing
+
++++
+
+### Introducing Functional Programming (FP) Style
+
+In other words, programs are composed by functions having no observable effects on the program's execution other than compute results given its inputs.
+
+---
+
+### So... What about this code?
+
+```java
+public static int add(int a, int b) {
+    while (b > 0) {
+        a++;
+        b--;
+    }
+    return a;
+}
+```
+
++++
+
+### Pure Functions
+
+- returns a value and do nothing else.
+- don't mutate any element of the outside world
+- don’t mutate their arguments
+- don’t explode if an error occurs
+    - can return an exception or anything else
+    - must return it, not throw it, nor log it, nor print it
+
++++
+
+### (Im)Pure Functions
+
+```java
+Set<Integer> s = new HashSet<>();
+
+public static boolean foo(int x) {
+    return s.contains(Integer.valueOf(x))
+}
+
+s.add(Integer.valueOf(1));
+foo(1); //true
+s.remove(Integer.valueOf(1))
+foo(1) //false
+```
+
+---
+
+### How to make programs safer
+
+```
+int x = add(1, 0)
+int y = add(x, 1)
+int z = add(x, y)
+int w = 3
+assert z == w //true
+```
+Expressions can be replaced by theirs results without changing the meaning of the program if **Referential Transparency Principle** hold.
+
+---
+
+### Can you write useful programs without side effects?
+
+In practise obviously, you can’t.
+
+In the end, also functional programs have to have an observable effect, such as displaying the result on a screen, or sending it over a network.
+
++++
+
+### Can you write useful programs without side effects?
+
+This interaction with the outside world won’t occur in the middle of a
+computation, but only when you finish the computation.
+
+In other words, side effects will be delayed and applied separately.
+
+---
+
+### Try yourself
+
+```java
+public static int div(int a, int b) {
+    return a / b;
+}
+```
+
++++
+
+### Try yourself
+
+Hint: wrapping effects is the key...
