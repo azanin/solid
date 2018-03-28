@@ -200,7 +200,7 @@ And, since the abstractions and details are all isolated from each other, the co
 
 ### A Complete Exercise
 
-We'd like to extract some useful information from github.com about all the repositories belonging to ekmett user.
+We'd like to extract some useful information from gitHub.com about all the repositories belonging to ekmett user.
 
 The goal is to create two different reports:
 
@@ -212,7 +212,7 @@ Json file report containing all the repos belonging to ekmett.
 
 +++
 
-You can query for repos at *https://api.github.com/users/ekmett/repos*
+You can query for repos at *https://api.gitHub.com/users/ekmett/repos*
 
 A response example is available in project's resources folder.
 
@@ -221,16 +221,9 @@ Plain text file
 
 This reports must be in the following form:
 
-> ${user} owns ${num} repos.  
-His most starred one is ${repo_name} with ${num_stars} stars.  
-Here is a brief description: ${description}  
-Here's the last ${n} commit(s) of it ${list of commit messages}.  
-Here's ${contributors_url} you can find all the contributors.
-
-Commits endpoint: https://api.github.com/repos/ekmett/${repo}/commits
-
-
-Plus: the number of commits (messages) should be configurable.
+> {user} owns ${num} repos.
+  His most starred one is ${repo_name} with ${num_stars} stars.
+  Here is a brief description: ${description}.
 
 +++
 Json file report must be in the following format
@@ -247,6 +240,9 @@ Json file report must be in the following format
 	}]
 }
 ```
+
+Commits endpoint: https://api.gitHub.com/repos/ekmett/${repo}/commits
+
 ---
 
 ### Functional Programming
