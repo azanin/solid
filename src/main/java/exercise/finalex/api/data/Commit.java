@@ -1,4 +1,4 @@
-package exercise.finalex;
+package exercise.finalex.api.data;
 
 public class Commit {
 

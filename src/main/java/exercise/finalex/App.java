@@ -1,13 +1,16 @@
 package exercise.finalex;
 
+import exercise.finalex.api.GitHub;
+import exercise.finalex.api.GitHubAdapter;
+import exercise.finalex.encoders.JsonReportEncoder;
+import exercise.finalex.encoders.PlainReportEncoder;
+import exercise.finalex.encoders.ReportEncoder;
+import exercise.finalex.model.Report;
+import exercise.finalex.repository.ReportRepository;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class App {
 
@@ -26,11 +29,25 @@ public class App {
 
         GitHubAdapter gitHubAdapter = new GitHubAdapter(github);
 
-        Stream<List<Commit>> ekmett = gitHubAdapter.repos("ekmett")
-                .stream()
-                .map((Repository repo) -> gitHubAdapter.commits("ekmett", repo.getName()));
+        ReportEncoder jsonReportEncoder = new JsonReportEncoder();
+
+        ReportEncoder customReportEncoder = new PlainReportEncoder();
+
+        ReportRepository reportRepository = new ReportRepository(gitHubAdapter);
+
+        Report report = reportRepository.reportsFor("ekmett");
+
+        Report starredReport = report.forMostStarredRepo();
+
+        String json = jsonReportEncoder.encode(report);
+
+        String custom = customReportEncoder.encode(starredReport);
+
+
 
     }
+
+
 
 //    {
 //        "user": "ekmett",
@@ -43,53 +60,6 @@ public class App {
 //    }]
 //    }
 
-    public static class Report {
-        private final String username;
-        private final Repos repos;
-
-        public Report(String username, Repos repos) {
-            this.username = username;
-            this.repos = repos;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public Repos getRepos() {
-            return repos;
-        }
-    }
-
-    private static class Repos {
-        private final List<Repo> repos;
-
-        private Repos(List<Repo> repos) {
-            this.repos = repos;
-        }
-
-        public Optional<Repo> mostStarredRepo() {
-            return repos.stream().max(Comparator.comparingInt(o -> o.stars));
-        }
-
-        public int repoCount() {
-            return repos.size();
-        }
-    }
-
-    public static class Repo {
-        private final int stars;
-        private final String name;
-        private final String description;
-        private final List<String> commits;
-
-        public Repo(int stars, String name, String description, List<String> commits) {
-            this.stars = stars;
-            this.name = name;
-            this.description = description;
-            this.commits = commits;
-        }
-    }
 
     private String format(String user, int num, String repoName, int numStars, String description) {
         return user + " owns " + num + " repos. \n" +

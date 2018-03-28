@@ -1,4 +1,4 @@
-package exercise.finalex;
+package exercise.finalex.api.data;
 
 import com.squareup.moshi.Json;
 

@@ -1,5 +1,7 @@
-package exercise.finalex;
+package exercise.finalex.api;
 
+import exercise.finalex.api.data.Commit;
+import exercise.finalex.api.data.Repository;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
