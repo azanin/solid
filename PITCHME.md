@@ -221,15 +221,16 @@ Plain text file
 
 This reports must be in the following form:
 
-``` ${user} owns ${num} repos.
-  His most starred one is ${repo_name} with ${num_stars} stars.
-  Here is a brief description: ${description}
-  Here's the last ${n} commit(s) of it available at ${https://api.github.com/repos/ekmett/${repo}/commits }
-  ${list of commit messages}
-  Here's ${contributors_url} you can find all the contributors.
-```
+> ${user} owns ${num} repos.  
+His most starred one is ${repo_name} with ${num_stars} stars.  
+Here is a brief description: ${description}  
+Here's the last ${n} commit(s) of it ${list of commit messages}.  
+Here's ${contributors_url} you can find all the contributors.
 
-Plus: the commit messages' number should be configurable.
+Commits endpoint: https://api.github.com/repos/ekmett/${repo}/commits
+
+
+Plus: the number of commits (messages) should be configurable.
 
 +++
 Json file report must be in the following format
