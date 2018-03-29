@@ -38,7 +38,7 @@ public class Main {
                 Arrays.asList(consoleCustomPrinter, consoleJsonPrinter);
 
         new App(repository, printers)
-                .generateRportsFor("azanin")
+                .generateRportsFor("ekmett")
                 .get();
     }
 }
