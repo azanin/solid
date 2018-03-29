@@ -232,7 +232,6 @@ Json file report must be in the following format
 {
 	"user": "ekmett",
 	"repos": [{
-		"id": 85458673,
 		"name": "compiler",
 		"stargazers": 10,
 		"description": "description",
