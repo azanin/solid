@@ -1,6 +1,6 @@
 package exercise.finalex.encoders;
 
-public class Custom extends DataType{
+public class Custom extends DataType {
 
     private Custom(String content) {
         super(content);

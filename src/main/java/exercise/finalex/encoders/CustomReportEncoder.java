@@ -1,8 +1,7 @@
 package exercise.finalex.encoders;
 
+import exercise.finalex.model.Repo;
 import exercise.finalex.model.Report;
-
-import java.util.Arrays;
 
 public class CustomReportEncoder implements ReportEncoder<Custom> {
 
@@ -15,16 +14,18 @@ public class CustomReportEncoder implements ReportEncoder<Custom> {
     @Override
     public Custom encode(Report report) {
 
-        if (report.mostStarredRepo().isPresent())
+        if (report.mostStarredRepo().isPresent()) {
+            Repo repo = report.mostStarredRepo().get();
             return Custom.from(
                     String.format(customFormat,
-                            Arrays.asList(
-                                    report.getUsername(),
-                                    report.repoCount(),
-                                    report.mostStarredRepo().get()))
-            );
-        else
-            return Custom.from(String.format(errorFormat, Arrays.asList(report.getUsername())));
+                            report.getUsername(),
+                            report.repoCount(),
+                            repo.getName(),
+                            repo.getStars(),
+                            repo.getDescription()));
+        } else {
+            return Custom.from(String.format(errorFormat, report.getUsername()));
+        }
     }
 
 }
