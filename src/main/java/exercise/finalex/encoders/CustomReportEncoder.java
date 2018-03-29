@@ -3,6 +3,8 @@ package exercise.finalex.encoders;
 import exercise.finalex.model.Repo;
 import exercise.finalex.model.Report;
 
+import java.util.Collections;
+
 public class CustomReportEncoder implements ReportEncoder<Custom> {
 
     private final String customFormat = "%s owns %d repos.\n" +
@@ -22,10 +24,11 @@ public class CustomReportEncoder implements ReportEncoder<Custom> {
                             report.repoCount(),
                             repo.getName(),
                             repo.getStars(),
-                            repo.getDescription()));
-        } else {
-            return Custom.from(String.format(errorFormat, report.getUsername()));
+                            repo.getDescription())
+            );
         }
+        else
+            return Custom.from(String.format(errorFormat, Collections.singletonList(report.getUsername())));
     }
 
 }

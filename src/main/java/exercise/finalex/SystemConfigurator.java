@@ -2,27 +2,28 @@ package exercise.finalex;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
-import exercise.finalex.api.GitHubInvoker;
 import exercise.finalex.api.GitHubAdapter;
 import exercise.finalex.api.GitHubApi;
-import exercise.finalex.encoders.JsonReportEncoder;
-import exercise.finalex.encoders.CustomReportEncoder;
-import exercise.finalex.encoders.ReportEncoder;
+import exercise.finalex.api.GitHubInvoker;
+import exercise.finalex.encoders.*;
 import exercise.finalex.model.Report;
+import exercise.finalex.model.Unit;
 import exercise.finalex.repository.ReportRepository;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
-public class SystemConfigurator {
+import java.util.function.Function;
+
+class SystemConfigurator {
 
     private SystemConfigurator() {
     }
 
-    public static String provideUrl() {
+    static String provideUrl() {
         return "https://api.gitHub.com";
     }
 
-    public static <Invoker> Invoker provideHttpInvoker(String apiUrl, Class<Invoker> invokerclass) {
+    static <Invoker> Invoker provideHttpInvoker(String apiUrl, Class<Invoker> invokerclass) {
         // Create a very simple REST adapter which points the GitHubInvoker API.
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(apiUrl)
@@ -33,24 +34,52 @@ public class SystemConfigurator {
         return retrofit.create(invokerclass);
     }
 
-    public static GitHubApi provideHttpApi(GitHubInvoker invoker) {
+    static GitHubApi provideHttpApi(GitHubInvoker invoker) {
         return new GitHubAdapter(invoker);
     }
 
-    public static ReportRepository provideRepository(GitHubApi api) {
+    static ReportRepository provideRepository(GitHubApi api) {
         return new ReportRepository(api);
     }
 
-    public static ReportEncoder providePlainEncoder() {
+    static ReportEncoder<Custom> provideCustomEncoder() {
         return new CustomReportEncoder();
     }
 
-    public static <T> JsonAdapter<T> provideJsonAdapter(Class<T> modelClass) {
+    static <T> JsonAdapter<T> provideJsonAdapter(Class<T> modelClass) {
         return new Moshi.Builder().build().adapter(modelClass);
     }
 
-    public static  ReportEncoder provideJsonEncoder(JsonAdapter<Report> adapter) {
+    static ReportEncoder<Json> provideJsonEncoder(JsonAdapter<Report> adapter) {
         return new JsonReportEncoder(adapter);
+    }
+
+    static ReportPrinter<Json, Unit> provideJsonConsolePrinter(ReportEncoder<Json> jsonReportEncoder) {
+
+        Function<Json, Effect<Unit>> f = new Function<Json, Effect<Unit>>() {
+            @Override
+            public Effect<Unit> apply(Json json) {
+
+                Effect<Unit> e = () -> {
+                    System.out.println(json.getContent());
+                    return Unit.value;
+                };
+                return e;
+            }
+        };
+
+        return new ReportPrinter<>(jsonReportEncoder, f);
+    }
+
+
+    static ReportPrinter<Custom, Unit> provideCustomConsolePrinter(ReportEncoder<Custom> customEnc) {
+
+        Function<Custom, Effect<Unit>> fun = customFormat -> () -> {
+            System.out.println(customFormat.getContent());
+            return Unit.value;
+        };
+
+        return new ReportPrinter<>(customEnc, fun);
     }
 
 }

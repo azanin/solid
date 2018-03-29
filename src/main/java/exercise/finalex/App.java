@@ -1,33 +1,34 @@
 package exercise.finalex;
 
+import exercise.finalex.encoders.DataType;
 import exercise.finalex.model.Report;
+import exercise.finalex.model.Result;
+import exercise.finalex.model.Unit;
 import exercise.finalex.repository.ReportRepository;
+
+import java.util.List;
 
 public class App {
 
     private final ReportRepository repository;
-    private final ReportPrinter consolePrinter;
-    private final ReportPrinter jsonFilePrinter;
+    private final List<ReportPrinter<? extends DataType, Unit>> printers;
 
-    public App(ReportRepository repository,
-               ReportPrinter consolePrinter,
-               ReportPrinter jsonFilePrinter) {
+    App(ReportRepository repository, List<ReportPrinter<? extends DataType, Unit>> printers) {
         this.repository = repository;
-        this.consolePrinter = consolePrinter;
-        this.jsonFilePrinter = jsonFilePrinter;
+        this.printers = printers;
     }
 
-    public void run() {
+    public Result<Unit> generateRportsFor(String userName) {
 
-        Report report = repository.reportFor("ekmett");
+        Report report = repository.reportFor(userName);
 
-//        String json = jsonEnc.encode(report);
-//
-//        String custom = plainEnc.encode(report);
-//
-//        printerService.printOn(json)
-//        printerService.printOn(custom)
+        for (ReportPrinter<? extends DataType, Unit> reportPrinter : printers) {
+            Result<Unit> observableSideEffect = reportPrinter.printOf(report);
+            if(observableSideEffect.isFailure())
+                return observableSideEffect;
+        }
 
+        return Result.success(Unit.value);
     }
 
 }

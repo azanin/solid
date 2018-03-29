@@ -18,7 +18,8 @@ public class GitHubAdapter implements GitHubApi {
     @Override
     public List<Repository> repos(String owner) {
         try {
-            return this.gitHub.repos(owner).execute().body();
+            List<Repository> body = this.gitHub.repos(owner).execute().body();
+            return body == null ? Collections.emptyList() : body;
         } catch (IOException e) {
             return Collections.emptyList();
         }
@@ -27,7 +28,8 @@ public class GitHubAdapter implements GitHubApi {
     @Override
     public List<Commit> commits(String owner, String repo) {
         try {
-            return this.gitHub.commits(owner, repo).execute().body();
+            List<Commit> body = this.gitHub.commits(owner, repo).execute().body();
+            return body == null ? Collections.emptyList() : body;
         } catch (IOException e) {
             return Collections.emptyList();
         }
