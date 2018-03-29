@@ -11,6 +11,7 @@ import exercise.finalex.model.Unit;
 import exercise.finalex.repository.ReportRepository;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.function.Function;
 
@@ -39,7 +40,7 @@ class SystemConfigurator {
     }
 
     static ReportRepository provideRepository(GitHubApi api) {
-        return new ReportRepository(api);
+        throw new NotImplementedException();
     }
 
     static ReportEncoder<Custom> provideCustomEncoder() {

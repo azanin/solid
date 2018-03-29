@@ -1,12 +1,13 @@
 package exercise.finalex;
 
 import exercise.finalex.encoders.ReportEncoder;
-import exercise.finalex.model.Result;
 import exercise.finalex.model.Report;
+import exercise.finalex.model.Result;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.function.Function;
 
-public class ReportPrinter<EncodeTo,Media> {
+public class ReportPrinter<EncodeTo, Media> {
 
     private final ReportEncoder<EncodeTo> encoder;
     private final Function<EncodeTo, Effect<Media>> toSideEffect;
@@ -17,8 +18,9 @@ public class ReportPrinter<EncodeTo,Media> {
     }
 
     public Result<Media> printOf(Report report) {
-        EncodeTo encode = encoder.encode(report);
-        return Result.fromEffect("Report Printer", toSideEffect.apply(encode));
+//        ...
+//        return Result.fromEffect("Report Printer", ...);
+        throw new NotImplementedException();
     }
 
 }
