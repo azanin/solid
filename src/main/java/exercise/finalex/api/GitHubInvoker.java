@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
-public interface GitHub {
+public interface GitHubInvoker {
 
     @GET("/users/{owner}/repos")
     Call<List<Repository>> repos(

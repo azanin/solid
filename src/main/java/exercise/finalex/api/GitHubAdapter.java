@@ -9,9 +9,9 @@ import java.util.List;
 
 public class GitHubAdapter implements GitHubApi {
 
-    private final GitHub gitHub;
+    private final GitHubInvoker gitHub;
 
-    public GitHubAdapter(GitHub gitHub) {
+    public GitHubAdapter(GitHubInvoker gitHub) {
         this.gitHub = gitHub;
     }
 

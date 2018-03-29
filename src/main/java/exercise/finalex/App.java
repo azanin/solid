@@ -1,71 +1,35 @@
 package exercise.finalex;
 
-import exercise.finalex.api.GitHub;
-import exercise.finalex.api.GitHubAdapter;
-import exercise.finalex.encoders.JsonReportEncoder;
-import exercise.finalex.encoders.PlainReportEncoder;
-import exercise.finalex.encoders.ReportEncoder;
 import exercise.finalex.model.Report;
 import exercise.finalex.repository.ReportRepository;
-import retrofit2.Retrofit;
-import retrofit2.converter.moshi.MoshiConverterFactory;
-
-import java.io.IOException;
 
 public class App {
 
-    public static final String API_URL = "https://api.gitHub.com";
+    private final ReportRepository repository;
+    private final ReportPrinter consolePrinter;
+    private final ReportPrinter jsonFilePrinter;
 
-    public static void main(String... args) throws IOException {
+    public App(ReportRepository repository,
+               ReportPrinter consolePrinter,
+               ReportPrinter jsonFilePrinter) {
+        this.repository = repository;
+        this.consolePrinter = consolePrinter;
+        this.jsonFilePrinter = jsonFilePrinter;
+    }
 
-        // Create a very simple REST adapter which points the GitHub API.
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build();
+    public void run() {
 
-        // Create an instance of our GitHub API interface.
-        GitHub github = retrofit.create(GitHub.class);
+        Report report = repository.reportFor("ekmett");
 
-        GitHubAdapter gitHubAdapter = new GitHubAdapter(github);
-
-        ReportEncoder jsonReportEncoder = new JsonReportEncoder();
-
-        ReportEncoder customReportEncoder = new PlainReportEncoder();
-
-        ReportRepository reportRepository = new ReportRepository(gitHubAdapter);
-
-        Report report = reportRepository.reportsFor("ekmett");
-
-        Report starredReport = report.forMostStarredRepo();
-
-        String json = jsonReportEncoder.encode(report);
-
-        String custom = customReportEncoder.encode(starredReport);
-
-
+//        String json = jsonEnc.encode(report);
+//
+//        String custom = plainEnc.encode(report);
+//
+//        printerService.printOn(json)
+//        printerService.printOn(custom)
 
     }
 
-
-
-//    {
-//        "user": "ekmett",
-//            "repos": [{
-//        "id": 85458673,
-//                "username": "compiler",
-//                "stargazers": 10,
-//                "description": "description",
-//                "commits": ["commit message1","commit message2"]
-//    }]
-//    }
-
-
-    private String format(String user, int num, String repoName, int numStars, String description) {
-        return user + " owns " + num + " repos. \n" +
-                "His most starred one is " + repoName + " with " + numStars + " stars. \n" +
-                "Here is a brief description: " + description + ". \n";
-    }
 }
 
 

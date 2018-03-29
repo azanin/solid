@@ -2,7 +2,7 @@ package exercise.finalex.encoders;
 
 import exercise.finalex.model.Report;
 
-public interface ReportEncoder {
-    String encode(Report report);
+public interface ReportEncoder<EncodeTo> {
+    EncodeTo encode(Report report);
 }
 
