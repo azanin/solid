@@ -1,7 +1,5 @@
 package exercise.finalex.model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,10 +23,10 @@ public class Report {
     }
 
     public int repoCount() {
-        throw new NotImplementedException();
+        return repos.size();
     }
 
     public Optional<Repo> mostStarredRepo() {
-        throw new NotImplementedException();
+        return repos.stream().max(Comparator.comparingInt(Repo::getStars));
     }
 }

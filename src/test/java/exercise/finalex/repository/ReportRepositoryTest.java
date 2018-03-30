@@ -1,6 +1,7 @@
 package exercise.finalex.repository;
 
 import exercise.finalex.TestSamplesFactory;
+import exercise.finalex.api.GitHubApi;
 import exercise.finalex.api.data.CommitContainer;
 import exercise.finalex.api.data.CommitContainer.Commit;
 import exercise.finalex.api.data.Repository;
@@ -17,7 +18,7 @@ public class ReportRepositoryTest {
     @Test
     public void testSomeRepo() {
         final Repository sampleRepo = TestSamplesFactory.aRepoWithName("aRepoName");
-        final TestGitHubApiUtil gitHubApiTest = new TestGitHubApiUtil(
+        final GitHubApi gitHubApiTest = new GitHubApiStub(
                 "aOwner",
                 "aRepoName",
                 sampleRepo,
@@ -34,7 +35,7 @@ public class ReportRepositoryTest {
 
     @Test
     public void testNoneRepo() {
-        final TestGitHubApiUtil gitHubApiTest = new TestGitHubApiUtil(
+        final GitHubApiStub gitHubApiTest = new GitHubApiStub(
                 "aOwner",
                 "aRepoName",
                 TestSamplesFactory.aRepoWithName("name"),

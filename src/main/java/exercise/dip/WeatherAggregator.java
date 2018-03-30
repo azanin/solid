@@ -1,16 +1,23 @@
 package exercise.dip;
 
+import java.util.List;
+
 public class WeatherAggregator {
 
-    private WeatherApi1 weatherApi1 = new WeatherApi1();
-    private WeatherApi2 weatherApi2 = new WeatherApi2();
+    private final List<WeatherApi> weatherApis;
 
-    public double getAverage() {
-        return (weatherApi1.getTemperatureCelcius() + toCelcius(weatherApi2.getTemperatureFahrenheit())) / 2;
+
+    public WeatherAggregator(List<WeatherApi> weatherApis) {
+        this.weatherApis = weatherApis;
     }
 
-    private double toCelcius(double temperatureFahrenheit) {
-        return (temperatureFahrenheit - 32) / 1.8f;
+    public double getAverage() {
+        double res = 0.0d;
+        for (WeatherApi weatherApi : weatherApis) {
+            res += weatherApi.getTemperature();
+        }
+        return res / weatherApis.size();
     }
 
 }
+

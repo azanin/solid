@@ -1,9 +1,9 @@
 package exercise.dip;
 
-public class WeatherApi1 {
+public class WeatherApi1 implements WeatherApi {
 
-    public double getTemperatureCelcius() {
+    @Override
+    public double getTemperature() {
         return 42.0d;
     }
-
 }

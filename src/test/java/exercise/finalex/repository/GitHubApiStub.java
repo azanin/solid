@@ -7,14 +7,17 @@ import exercise.finalex.api.data.Repository;
 import java.util.Collections;
 import java.util.List;
 
-public class TestGitHubApiUtil implements GitHubApi{
+public class GitHubApiStub implements GitHubApi{
 
     private final String repoName;
     private final String owner;
     private final Repository repository;
     private final List<CommitContainer> commits;
 
-    public TestGitHubApiUtil(String owner, String repoName, Repository repository, List<CommitContainer> commits) {
+    public GitHubApiStub(String owner,
+                         String repoName,
+                         Repository repository,
+                         List<CommitContainer> commits) {
         this.owner = owner;
         this.repoName = repoName;
         this.repository = repository;
